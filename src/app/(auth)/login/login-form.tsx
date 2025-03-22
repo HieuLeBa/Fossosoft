@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { LoginBody, LoginBodyType } from '@/schemaValidations/auth.schema'
-import { useToast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 import authApiRequest from '@/apiRequests/auth'
 import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
@@ -23,7 +23,6 @@ import { useAppContext } from '@/app/app-provider'
 const LoginForm = () => {
   const [loading, setLoading] = useState(false)
   const { setUser } = useAppContext()
-  const { toast } = useToast()
   const router = useRouter()
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
@@ -44,9 +43,7 @@ const LoginForm = () => {
         sessionToken: result.payload.data.token,
         expiresAt: result.payload.data.expiresAt
       })
-      toast({
-        description: result.payload.message
-      })
+      toast.success(result.payload.message)
       setUser(result.payload.data.account)
       router.push('/')
       router.refresh()

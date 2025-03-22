@@ -12,18 +12,17 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
 import { useState } from 'react'
 import { AccountResType, UpdateMeBody, UpdateMeBodyType } from '@/schemaValidations/account.schema'
 import accountApiRequest from '@/apiRequests/account'
+import { toast } from 'sonner'
 
 type Profile = AccountResType['data']
 
 const ProfileForm = ({ profile }: { profile: Profile }) => {
   const [loading, setLoading] = useState(false)
-  const { toast } = useToast()
   const router = useRouter()
   const form = useForm<UpdateMeBodyType>({
     resolver: zodResolver(UpdateMeBody),
@@ -38,9 +37,7 @@ const ProfileForm = ({ profile }: { profile: Profile }) => {
     setLoading(true)
     try {
       const result = await accountApiRequest.updateMe(values)
-      toast({
-        description: result.payload.message
-      })
+      toast.success(result.payload.message)
       router.refresh()
     } catch (error: any) {
       handleErrorApi({

@@ -15,22 +15,19 @@ import {
 } from '@/components/ui/alert-dialog'
 import productApiRequest from '@/apiRequests/product'
 import { handleErrorApi } from '@/lib/utils'
-import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export default function DeleteProduct({
   product
 }: {
   product: ProductResType['data']
 }) {
-  const { toast } = useToast()
   const router = useRouter()
   const deleteProduct = async () => {
     try {
       const result = await productApiRequest.delete(product.id)
-      toast({
-        description: result.payload.message
-      })
+      toast.success(result.payload.message)
       router.refresh()
     } catch (error) {
       handleErrorApi({ error })

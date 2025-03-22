@@ -12,7 +12,6 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
 import { useRef, useState } from 'react'
@@ -25,12 +24,13 @@ import {
 import productApiRequest from '@/apiRequests/product'
 import { Textarea } from '@/components/ui/textarea'
 import Image from 'next/image'
+import { toast } from 'sonner'
+
 type Product = ProductResType['data']
 const ProductAddForm = ({ product }: { product?: Product }) => {
   const [file, setFile] = useState<File | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [loading, setLoading] = useState(false)
-  const { toast } = useToast()
   const router = useRouter()
   const form = useForm<CreateProductBodyType>({
     resolver: zodResolver(CreateProductBody),
@@ -54,9 +54,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
         image: imageUrl
       })
 
-      toast({
-        description: result.payload.message
-      })
+      toast.success(result.payload.message)
       router.push('/products')
       router.refresh()
     } catch (error: any) {
@@ -87,9 +85,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
 
       const result = await productApiRequest.update(product.id, values)
 
-      toast({
-        description: result.payload.message
-      })
+      toast.success(result.payload.message)
       router.refresh()
     } catch (error: any) {
       handleErrorApi({
