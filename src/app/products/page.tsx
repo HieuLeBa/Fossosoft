@@ -16,26 +16,40 @@ export default async function ProductListPage() {
   const { payload } = await productApiRequest.getList();
   const productList = payload.data;
   return (
-    <div className="space-y-3">
-      <h1>Product List</h1>
-      <ProductAddButton />
+    <div className="container mx-auto max-w-5xl px-6 py-6">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold text-gray-800">
+          🛍️ Danh sách sản phẩm
+        </h1>
+        <ProductAddButton />
+      </div>
 
-      <div className="space-y-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {productList.map((product) => (
-          <div key={product.id} className="flex space-x-4">
-            <Link href={`/products/${product.id}`}>
+          <div
+            key={product.id}
+            className="bg-white shadow-md rounded-lg p-5 flex flex-col items-center space-y-3 transition-all hover:shadow-lg"
+          >
+            <Link href={`/products/${product.id}`} className="w-40 h-40">
               <Image
                 src={product.image}
                 alt={product.name}
-                width={180}
-                height={180}
-                className="w-32 h-32 object-cover"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover rounded-md"
               />
             </Link>
 
-            <h3>{product.name}</h3>
-            <div>{product.price}</div>
-            <ProductEditButton product={product} />
+            <div className="text-center">
+              <h3 className="text-lg font-semibold">{product.name}</h3>
+              <div className="text-gray-600 font-bold text-lg">
+                {product.price}₫
+              </div>
+            </div>
+
+            <div className="flex space-x-3">
+              <ProductEditButton product={product} />
+            </div>
           </div>
         ))}
       </div>

@@ -1,3 +1,7 @@
+import Banner from '@/components/banner'
+import Container from '@/components/container'
+import MainContent from '@/components/main-left'
+import Sidebar from '@/components/side-bar'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -6,5 +10,15 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <main>Xin chào</main>
+  return (
+    <main>
+      <Banner />
+      <Container>
+        <div className="flex gap-8">
+          <MainContent />
+          <Sidebar />
+        </div>
+      </Container>
+    </main>
+  )
 }

@@ -1,9 +1,9 @@
-import { toast } from '@/components/ui/use-toast'
 import { EntityError } from '@/lib/http'
 import { type ClassValue, clsx } from 'clsx'
 import { UseFormSetError } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import jwt from 'jsonwebtoken'
+import { toast } from 'sonner'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -26,10 +26,7 @@ export const handleErrorApi = ({
       })
     })
   } else {
-    toast({
-      title: 'Lỗi',
-      description: error?.payload?.message ?? 'Lỗi không xác định',
-      variant: 'destructive',
+    toast.error(error?.payload?.message ?? 'Lỗi không xác định', {
       duration: duration ?? 5000
     })
   }
