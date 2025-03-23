@@ -2,6 +2,7 @@
 
 import React from "react";
 import ButtonUIFososoft from "./button-redirect";
+import Image from "next/image";
 
 interface PromoBannerProps {
   image: string;
@@ -39,7 +40,7 @@ export function PromoBanner({
 }: PromoBannerProps) {
   return (
     <div className="bg-blue-600 text-white rounded-2xl py-9 shadow-lg">
-      <img src={image} alt={title} className="w-full rounded-lg mb-4" />
+      <Image src={image} alt={title} width={367} height={266} className="w-full rounded-lg mb-4" />
       <h3 className="px-6 py-12 text-lg font-semibold">{title}</h3>
       <div className="px-6">
         <ButtonUIFososoft

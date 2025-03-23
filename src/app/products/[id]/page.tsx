@@ -1,6 +1,5 @@
 import productApiRequest from '@/apiRequests/product'
-import Image from 'next/image'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { cache } from 'react'
 import envConfig from '@/config'
 import { baseOpenGraph } from '@/app/shared-metadata'

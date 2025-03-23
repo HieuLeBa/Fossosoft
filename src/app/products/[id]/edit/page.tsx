@@ -1,6 +1,6 @@
 import productApiRequest from '@/apiRequests/product'
 import ProductAddForm from '@/app/products/_components/product-add-form'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { cache } from 'react'
 
 const getDetail = cache(productApiRequest.getDetail)
@@ -10,7 +10,7 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const { payload } = await getDetail(Number(params.id))
   const product = payload.data
@@ -26,7 +26,9 @@ export default async function ProductEdit(props: Props) {
   try {
     const { payload } = await getDetail(Number(params.id))
     product = payload.data
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 
   return (
     <div>
