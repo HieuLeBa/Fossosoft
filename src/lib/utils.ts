@@ -1,38 +1,37 @@
 import { EntityError } from '@/lib/http'
 import { type ClassValue, clsx } from 'clsx'
-import { UseFormSetError, FieldValues } from 'react-hook-form'
+import { UseFormSetError } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { toast } from 'sonner'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const handleErrorApi = <T extends FieldValues>({
+export const handleErrorApi = ({
   error,
   setError,
   duration
 }: {
-  error: unknown
-  setError?: UseFormSetError<T>
+  error: any
+  setError?: UseFormSetError<any>
   duration?: number
 }) => {
   if (error instanceof EntityError && setError) {
-    error.payload.errors.forEach((item: { field: keyof T; message: string }) => {
+    error.payload.errors.forEach((item) => {
       setError(item.field, {
         type: 'server',
         message: item.message
       })
     })
   } else {
-    toast.error(
-      (error as { payload?: { message?: string } })?.payload?.message ?? 'Lỗi không xác định',
-      { duration: duration ?? 5000 }
-    )
+    toast.error(error?.payload?.message ?? 'Lỗi không xác định', {
+      duration: duration ?? 5000
+    })
+    
   }
 }
-
 /**
  * Xóa đi ký tự `/` đầu tiên của path
  */
@@ -40,6 +39,6 @@ export const normalizePath = (path: string) => {
   return path.startsWith('/') ? path.slice(1) : path
 }
 
-export const decodeJWT = <T extends JwtPayload | null>(token: string): T => {
-  return jwt.decode(token) as T
+export const decodeJWT = <Payload = any>(token: string) => {
+  return jwt.decode(token) as Payload
 }
