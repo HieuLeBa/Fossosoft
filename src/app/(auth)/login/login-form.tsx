@@ -47,7 +47,7 @@ const LoginForm = () => {
       setUser(result.payload.data.account)
       router.push('/')
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError

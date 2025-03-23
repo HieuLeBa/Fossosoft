@@ -39,7 +39,7 @@ const ProfileForm = ({ profile }: { profile: Profile }) => {
       const result = await accountApiRequest.updateMe(values)
       toast.success(result.payload.message)
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError

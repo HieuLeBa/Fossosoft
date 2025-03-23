@@ -50,7 +50,7 @@ const RegisterForm = () => {
       setUser(result.payload.data.account)
 
       router.push('/me')
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError

@@ -12,7 +12,7 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const { payload } = await getDetail(Number(params.id))
   const product = payload.data
@@ -43,21 +43,15 @@ export default async function ProductDetail(props: Props) {
   try {
     const { payload } = await getDetail(Number(params.id))
     product = payload.data
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 
   return (
     <div>
       {!product && <div>Không tìm thấy sản phẩm</div>}
       {product && (
         <div>
-          {/* <Image
-            src={product.image}
-            alt={product.name}
-            width={180}
-            height={180}
-            className='w-32 h-32 object-cover'
-          /> */}
-
           <h3>{product.name}</h3>
           <div>{product.price}</div>
         </div>

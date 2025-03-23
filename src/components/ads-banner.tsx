@@ -6,8 +6,6 @@ import ButtonUIFososoft from "./button-redirect";
 interface PromoBannerProps {
   image: string;
   title: string;
-  buttonText: string;
-  link: string;
 }
 
 const promoData = [
@@ -38,8 +36,6 @@ export default function AdsBanner() {
 export function PromoBanner({
   image,
   title,
-  buttonText,
-  link,
 }: PromoBannerProps) {
   return (
     <div className="bg-blue-600 text-white rounded-2xl py-9 shadow-lg">

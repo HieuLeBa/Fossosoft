@@ -2,7 +2,7 @@ import authApiRequest from '@/apiRequests/auth'
 import { HttpError } from '@/lib/http'
 import { cookies } from 'next/headers'
 
-export async function POST(request: Request) {
+export async function POST() {
   const cookieStore = await cookies()
   const sessionToken = cookieStore.get('sessionToken')
   if (!sessionToken) {

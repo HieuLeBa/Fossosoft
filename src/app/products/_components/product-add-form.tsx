@@ -57,7 +57,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
       toast.success(result.payload.message)
       router.push('/products')
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError
@@ -87,7 +87,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
 
       toast.success(result.payload.message)
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       handleErrorApi({
         error,
         setError: form.setError

@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ProductListResType } from "@/schemaValidations/product.schema";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Pencil, Trash2 } from "lucide-react";
-import { Card } from "@/components/ui/card"; // Thêm Card để bố cục đẹp hơn
+import { Pencil } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 export default function ProductEditButton({
   product,
